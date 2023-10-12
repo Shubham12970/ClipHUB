@@ -7,6 +7,25 @@ import Upload from './components/Upload';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ForgotPassword from './components/ForgotPassword';
+import path from 'path';
+import express from "express";
+const app=express();
+
+const _dirname= path.dirname("")
+const buildPath= path.join(_dirname,"../build/index.html"); 
+
+app.use(express.static(buildPath))
+
+app.get("/",function(req,res){
+  res.sendFile(
+    buildPath,
+    function (err){
+      if(err){
+        res.status(500).send(err);
+      }
+    }
+  )
+})
 
 function App() {
   return (
